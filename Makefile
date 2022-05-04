@@ -3,7 +3,7 @@ export GO111MODULE=on
 
 OS ?= $(shell go env GOOS)
 ARCH ?= $(shell go env GOARCH)
-ALL_ARCH := amd64 arm arm64
+ALL_ARCH := amd64 arm64
 DOCKER_ARCH := "amd64" "arm v7" "arm64 v8"
 ifeq ($(OS),linux)
     BINS := bin/$(OS)/$(ARCH)/kg bin/$(OS)/$(ARCH)/kgctl
@@ -154,11 +154,10 @@ $(BINS): $(SRC) go.mod
 	    /bin/sh -c " \
 	        GOARCH=$(word 3,$(subst /, ,$@)) \
 	        GOOS=$(word 2,$(subst /, ,$@)) \
-	        GOCACHE=/$(PROJECT)/.cache \
-		CGO_ENABLED=0 \
-		go build -mod=vendor -o $@ \
-		    $(LD_FLAGS) \
-		    ./cmd/$(@F)/... \
+	        CGO_ENABLED=0 \
+	        go build -mod=vendor -o $@ \
+	        $(LD_FLAGS) \
+	        ./cmd/$(@F)/... \
 	    "
 
 fmt:
