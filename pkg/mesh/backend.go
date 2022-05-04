@@ -85,7 +85,7 @@ func (n *Node) Ready() bool {
 		n.Endpoint.Ready() &&
 		n.Key != wgtypes.Key{} &&
 		n.Subnet != nil &&
-		time.Now().Unix()-n.LastSeen < int64(checkInPeriod)*2/int64(time.Second)
+		time.Now().Unix()-n.LastSeen < int64(checkInPeriod)*8/int64(time.Second)
 }
 
 // Peer represents a peer in the network.
