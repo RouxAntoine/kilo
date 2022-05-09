@@ -147,7 +147,13 @@ func determineGranularity(gr mesh.Granularity, ns []*mesh.Node) (mesh.Granularit
 		if len(ns) == 0 {
 			return gr, errors.New("could not get any nodes")
 		}
-		ret := mesh.Granularity(ns[0].Granularity)
+
+		var ret mesh.Granularity
+		for _, node := range ns {
+			if node.Granularity != "" {
+				ret = mesh.Granularity(node.Granularity)
+			}
+		}
 		switch ret {
 		case mesh.LogicalGranularity:
 		case mesh.FullGranularity:

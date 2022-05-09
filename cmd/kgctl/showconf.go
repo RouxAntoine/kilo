@@ -219,7 +219,7 @@ func runShowConfPeer(_ *cobra.Command, args []string) error {
 	if err != nil {
 		return fmt.Errorf("failed to list peers: %w", err)
 	}
-	// Obtain the Granularity by looking at the annotation of the first node.
+	// Obtain the Granularity by looking at the annotation of the first node with granularity annotation.
 	if opts.granularity, err = determineGranularity(opts.granularity, ns); err != nil {
 		return fmt.Errorf("failed to determine granularity: %w", err)
 	}
